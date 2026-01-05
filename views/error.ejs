@@ -1,0 +1,7 @@
+<%- layout("./Layouts/boilerplate.ejs") %>
+
+<div class="row">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error: <%= err.statusCode || 500 %> — <%= err.message %></h4>
+    </div>
+</div>

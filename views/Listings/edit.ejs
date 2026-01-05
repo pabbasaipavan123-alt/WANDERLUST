@@ -1,0 +1,60 @@
+<%- layout("/Layouts/boilerplate.ejs") %>
+<div class="row">
+    <form method="post" action="/listings/<%=listing.id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+        <div class="col-8 offset-2">
+        <div>  <label for="title" class="form-label">Edit title</label>
+            <input class="form-control" id="title" name="listing[title]" type="text" placeholder="enter title" value="<%= listing.title%>" required>
+            <div class="valid-feedback">Looks Good!</div>    
+     <div class="invalid-feedback">Please Enter The Field</div>  
+        </div>
+      
+        <br>
+        <br>
+        <div>
+            <label for="description" class="form-label">Edit description</label>
+             <textarea id="description" name="listing[description]" class="form-control"required><%= listing.description%></textarea>
+            <div class="valid-feedback">Looks Good!</div>    
+     <div class="invalid-feedback">Please Enter The Field</div>  
+            </div>
+       
+        <br>
+        <br>
+        <div class="mb-3">
+            Original Listing Image
+            <br>
+            <img src="<%=listing.image.url%>" alt="" height="300px" width="250px">
+        </div>
+        <div> 
+                <label for="image" class="form-label">Upload New Image </label>
+                <input id="image"  class = "form-control"name="listing[image]" type="file" placeholder="enter url/link"></div>
+     
+        <br>
+        <br>
+        <div> 
+                    <label for="price" class="form-label">Edit Price</label> <input id="price" required  class="form-control" name ="listing[price]" type="number" placeholder="Enter price" value="<%= listing.price%>">
+            <div class="valid-feedback">Looks Good!</div>    
+     <div class="invalid-feedback">Please Enter The Field</div>  
+        </div>
+       
+        <br>
+        <br>
+        <div>
+            <label for="location" class="form-label">Edit Location</label>
+            <input id="location" class = "form-control" type="text" name="listing[location]" required placeholder="Enter location" value="<%= listing.location%>">
+            <div class="valid-feedback">Looks Good!</div>    
+     <div class="invalid-feedback">Please Enter The Field</div>  
+        </div>
+        <br>
+        <br>
+        <div>
+            <label for="country" class="form-label">Edit country</label>
+            <input id="country" class = "form-control"type="text" name="listing[country]" required  placeholder="Enter country" value="<%= listing.country%>">
+            <div class="valid-feedback">Looks Good!</div>    
+     <div class="invalid-feedback">Please Enter The Field</div>  
+        </div>
+        <br><br>
+        
+        <button class="btn btn-danger">Edit</button>
+        </div>
+    </form>
+    </div>

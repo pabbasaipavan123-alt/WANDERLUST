@@ -1,0 +1,72 @@
+<%- layout("./Layouts/boilerplate.ejs")%>
+<div class="filter-bar" style="margin-bottom: 5px;" id="filters">
+    <div class="filter-item">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
+        <p>Iconic cities</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-brands fa-fort-awesome"></i></div>
+        <p>Castles</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pools</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-solid fa-snowflake"></i></div>
+        <p>Arctic</p>
+    </div>
+    <div class="filter-item">
+        <div><i class="fa-solid fa-umbrella-beach"></i></div>
+        <p>Beach</p>
+    </div>
+  
+     <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total before taxes</label>
+        </div>
+    </div>
+</div>
+  
+
+    <div class="row">
+    <% for(list of listings) {%>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <a style="text-decoration: none;" href="/listings/<%=list.id%>">
+                <div class="card ">
+                    <img src="<%= list.image.url %>" class="card-img-top" alt="...">
+                      <div class="card-img-overlay"></div>
+                    <div class="card text-bg-dark"></div>
+                    <div class="card-body">
+                        <p class="card-text"><b><%= list.title %></b><br>
+                        <%= list.price.toLocaleString("en-IN") %> / night</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    <%}%>
+</div>
+
+    
+
