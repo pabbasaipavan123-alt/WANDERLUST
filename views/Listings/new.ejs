@@ -1,6 +1,6 @@
 <%- layout("/Layouts/boilerplate.ejs") %>
 <div class="row">
-    <form action="/listings" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+    <form action="/listings" method="POST" novalidate class="needs-validation">
         <div class="col-8 offset-2 mt-3">
         <div>
         <label for="title" class="form-label">Enter title</label>
@@ -59,11 +59,3 @@
     <br><br>
     </div>
 
-<script>
-    var map = L.map('map').setView([20.5937, 78.9629], 4);
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-</script>

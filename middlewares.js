@@ -1,44 +1,61 @@
 const Listing = require("./models/listing");
-const Review = require("./models/reviews.js");
-module.exports.isLoggedIn=(req,res,next)=>{
-    if (req.params.id && req.originalUrl.includes('/reviews')) {
-        req.session.redirectUrl = `/listings/${req.params.id}`;
-    } else {
-        req.session.redirectUrl = req.originalUrl || '/listings';
-    }
+const Review = require("./models/reviews");
 
-    if(!req.isAuthenticated()){
-        req.flash("success", "You must be logged in to do that!");
+
+module.exports.isLoggedIn = (req, res, next) => {
+    console.log("isLoggedIn hit, headersSent:", res.headersSent);
+
+    if (!req.isAuthenticated()) {
+        
+        res.locals.redirectUrl = req.path;
+        console.log("Not authenticated, redirecting");
         return res.redirect("/login");
     }
+
+    console.log("Authenticated, moving next");
     next();
 };
 
 
-module.exports.saveRedirectUrl=(req,res,next)=>{
-    if(req.session.redirectUrl){
-        res.locals.redirectUrl=req.session.redirectUrl;
+module.exports.saveRedirectUrl = (req, res, next) => {
+    if (req.session.redirectUrl) {
+        res.locals.redirectUrl = req.session.redirectUrl;
+
     }
-    next();
-}
+    return next();
+};
 
 
-module.exports.isOwner=async (req,res,next)=>{
-    let {id}=req.params;
-    
-    let listing=await Listing.findById(id);
-    if(!listing.owner || !listing.owner.equals(res.locals.currUser._id)){
-        req.flash("success","You are not the Owner of listing");
-        return res.redirect(`/listings/${id}`)
+module.exports.isOwner = async (req, res, next) => {
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+
+    if (!listing) {
+        req.flash("error", "Listing not found");
+        return res.redirect("/listings");
     }
-    next();
-}
-module.exports.isReviewAuthor=async (req,res,next)=>{
-    let {id, reviewId}=req.params;
-    let review=await Review.findById(reviewId);
-    if(!review.author || !review.author.equals(res.locals.currUser._id)){
-        req.flash("success","You are not the Author of this review");
-        return res.redirect(`/listings/${id}`)
+
+    if (!listing.owner.equals(req.user._id)) {
+        req.flash("error", "You are not the owner");
+        return res.redirect(`/listings/${id}`);
     }
-    next();
-}
+
+    return next();
+};
+
+module.exports.isReviewAuthor = async (req, res, next) => {
+    const { id, reviewId } = req.params;
+    const review = await Review.findById(reviewId);
+
+    if (!review) {
+        req.flash("error", "Review not found");
+        return res.redirect(`/listings/${id}`);
+    }
+
+    if (!review.author.equals(req.user._id)) {
+        req.flash("error", "You are not the author");
+        return res.redirect(`/listings/${id}`);
+    }
+
+    return next();
+};

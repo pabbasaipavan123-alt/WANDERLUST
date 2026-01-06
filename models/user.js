@@ -5,7 +5,7 @@ const { default: passportLocalMongoose } = require("passport-local-mongoose");
 
 
 const Schema=mongoose.Schema;
-const pasportLocalMOngoose=require("passport-local-mongoose");
+
 
 
 const userSchema=new Schema({
