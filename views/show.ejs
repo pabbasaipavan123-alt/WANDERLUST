@@ -30,11 +30,11 @@
     <p class="offset-2"><b>All Reviews</b></p>
     <div class="row mt-3 offset-2">
       <% for(let review of listing.reviews){%>
-      <div class="card review-card col-5 ms-3 mb-3" >
+      <div class="card review-card col-12 col-md-5 ms-3 mb-3">
         <div class="card-body">
           <h5 class="card-title mt-3">@<%=review.author.username%></h5>
         
-  <p class="starability-result" data-rating="<%=review.rating%>">
+  <p class="starability-result " data-rating="<%=review.rating%>">
     Rated:<%=review.rating%>
   </p>
     <div class="card-text mb-3"><%=review.comment%> </div>
@@ -86,5 +86,3 @@
 
  
   </div>
-
-
